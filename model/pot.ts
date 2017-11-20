@@ -2,9 +2,6 @@ import { FertilizationType } from './enums/fertilization-type'
 import { WateringType } from './enums/watering-type'
 import { PotStatus } from './pot-status'
 
-import { WateringPotService } from '../service/watering-pot-service'
-import { FertilizationPotService } from '../service/fertilizating-pot-service'
-
 import * as moment from '../node_modules/moment/moment'
 
 export class Pot {
@@ -15,18 +12,12 @@ export class Pot {
     private wateringType: WateringType;
     private potStatus: PotStatus;
 
-    private wateringPotService: WateringPotService;
-    private fertilizationPotService: FertilizationPotService;
-
     constructor(id: number, name: string, fertilizationType: FertilizationType, wateringType: WateringType) {
         this.id = id;
         this.name = name;
         this.fertilizationType = fertilizationType;
         this.wateringType = wateringType;
         this.potStatus = new PotStatus();
-
-        this.wateringPotService = new WateringPotService();
-        this.fertilizationPotService = new FertilizationPotService();
     }
 
     public GetId(): number {
@@ -49,26 +40,5 @@ export class Pot {
         this.name = name;
         this.fertilizationType = fertilizationType;
         this.wateringType = wateringType;
-    }
-
-    public ResetStatus(){
-        this.fertilizationPotService.ResetStatus(this);
-        this.wateringPotService.ResetStatus(this);
-    }
-
-    public DoWatering(): void {
-       this.wateringPotService.DoAction(this);
-    }
-
-    public DoFertilization() {
-        this.fertilizationPotService.DoAction(this);
-    }
-
-    public IsReadyForWatering(): boolean {
-        return this.wateringPotService.IsReadyForAction(this);
-    }
-
-    public IsReadyForFertilize(): boolean {
-        return this.fertilizationPotService.IsReadyForAction(this);
     }
 }

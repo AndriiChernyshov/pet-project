@@ -30,6 +30,10 @@
             this.potCollection.Watering(1);
             console.log('And now: Pots to be watering');
             this.potCollection.ListToWatering();
+            console.log('Lets simulate that #2 was watered ');
+            this.potCollection.EmulateWatering(2, new Date());
+            console.log('Pots to be watering');
+            this.potCollection.ListToWatering();
             console.log('Lets water them all');
             this.potCollection.WateringAll();
             this.potCollection.ListToWatering();
